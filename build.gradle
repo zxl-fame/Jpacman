@@ -12,9 +12,9 @@ sourceSets {
         java {
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
-            srcDir file('src/default-test/java')
+            srcDir file('src/test/java')
         }
-        resources.srcDir file('src/default-test/resources')
+        resources.srcDir file('src/test/resources')
         
     }
 }
@@ -38,6 +38,9 @@ repositories {
 
 dependencies {
     implementation "com.google.guava:guava:$guavaVersion"
+    // https://mvnrepository.com/artifact/org.mockito/mockito-core
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.5.1'
+
 
     compileOnly "com.github.spotbugs:spotbugs-annotations:$spotbugsAnnotationsVersion"
 
