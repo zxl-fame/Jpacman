@@ -15,12 +15,12 @@ import static org.mockito.Mockito.*;
 
 public class MapParserTest {
     private MapParser mapParser;
-    private final LevelFactory levelFactory = mock(LevelFactory.class);
-    private final BoardFactory boardFactory = mock(BoardFactory.class);
+        private final LevelFactory levelFactory = mock(LevelFactory.class);
+        private final BoardFactory boardFactory = mock(BoardFactory.class);
 
-    @BeforeEach
-    void init() {
-        mapParser = new MapParser(levelFactory, boardFactory);
+        @BeforeEach
+        void init() {
+            mapParser = new MapParser(levelFactory, boardFactory);
         when(boardFactory.createGround()).thenReturn(mock(Square.class));
         when(boardFactory.createWall()).thenReturn(mock((Square.class)));
         when(levelFactory.createGhost()).thenReturn(mock(Ghost.class));
@@ -28,8 +28,8 @@ public class MapParserTest {
     }
 
     @Test
-    @DisplayName("读取文件存在")
-    void parseMap3() throws Exception{
+    @DisplayName("读取一个存在的文件")
+    void parseMap1() throws Exception{
         String file="/simplemapOfPlayer.txt";
         mapParser.parseMap(file);
         verify(boardFactory,times(3)).createWall();
@@ -38,8 +38,8 @@ public class MapParserTest {
     }
 
     @Test
-    @DisplayName("读取文件存在")
-    void parseMap4() throws Exception{
+    @DisplayName("读取另一个存在的文件")
+    void parseMap2() throws Exception{
         String file="/simplemap.txt";
         mapParser.parseMap(file);
         verify(boardFactory,times(2)).createWall();
@@ -49,8 +49,8 @@ public class MapParserTest {
     }
 
     @Test
-    @DisplayName("null文件名")
-    void parseMap1() {
+    @DisplayName("读取null文件名")
+    void parseMap3() {
         assertThatThrownBy(()->{
             mapParser.parseMap((String)null);
         }).isInstanceOf(NullPointerException.class);
@@ -58,7 +58,7 @@ public class MapParserTest {
 
     @Test
     @DisplayName("读取文件不存在")
-    void parseMap2(){
+    void parseMap4(){
         String file="/UnExist.txt";
         assertThatThrownBy(()->{
             mapParser.parseMap(file);
@@ -66,7 +66,7 @@ public class MapParserTest {
     }
 
     @Test
-    @DisplayName("不能识别的地图")
+    @DisplayName("读取不能识别的地图")
     void parseMap5() throws Exception{
         String file="/unrecognizedcharmap.txt";
         assertThatThrownBy(()->{
